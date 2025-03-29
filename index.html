@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+    <link rel="stylesheet" href="style.css" />
+    <title>Tic Tac Toe Game</title>
+  </head>
+  <body>
+    <h1>Tic Tac Toe Game</h1>
+
+    <div class="board">
+      <span class="line-1"></span>
+      <span class="line-2"></span>
+      <span class="line-3"></span>
+      <span class="line-4"></span>
+    </div>
+    <div class="endgame">
+      <span class="msg"></span>
+      <table>
+        <thead>
+          <tr>
+            <th class="x">X</th>
+            <th class="o">O</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="win-player-x">0</td>
+            <td class="win-player-o">0</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="controls">
+        <button class="endgame-newgame" type="reset">Play again</button>
+        <button class="endgame-newgame reset" type="reset">reset Game</button>
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>

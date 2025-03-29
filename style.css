@@ -1,0 +1,323 @@
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  font-optical-sizing: auto;
+  background-color: #fff;
+  margin: 0;
+}
+
+h1 {
+  padding: 20px;
+  margin: 0 0 20px;
+  background-color: #eee;
+  text-align: center;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  justify-content: center;
+  width: fit-content;
+  margin: auto;
+  position: relative;
+}
+
+.board span {
+  position: absolute;
+  background-color: #dddddd;
+  z-index: 1;
+  border-radius: 5px;
+}
+
+.line-1,
+.line-2 {
+  width: 5px;
+  height: 100%;
+  animation: horizontal-lines 1s linear;
+  top: 0;
+}
+
+.line-1 {
+  left: 100px;
+}
+.line-2 {
+  right: 100px;
+}
+
+.line-3,
+.line-4 {
+  animation: vertical-lines 1s linear;
+  width: 100%;
+  height: 5px;
+  left: 0;
+}
+
+.line-3 {
+  top: 100px;
+}
+
+.line-4 {
+  bottom: 100px;
+}
+
+.cell {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 3px;
+}
+
+.player-x {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.player-x span {
+  position: absolute;
+  width: 60px;
+  height: 8px;
+  animation: draw-x 0.2s linear;
+
+  background-color: #545af5;
+  border-radius: 5px;
+  z-index: 5;
+}
+
+.player-x span:first-child {
+  transform: rotate(45deg);
+}
+
+.player-x span:last-child {
+  transform: rotate(-45deg);
+}
+.player-o {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.player-o span {
+  width: 50px;
+  height: 50px;
+  border: 8px solid #e66660;
+  border-radius: 50%;
+  background-color: transparent;
+  transform: scale(0);
+  animation: draw-circle 0.3s ease-in-out forwards;
+}
+
+/* X Hover Effect */
+.hover-x {
+  position: relative;
+}
+
+.hover-x::before,
+.hover-x::after {
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 8px;
+  background-color: rgba(
+    140,
+    144,
+    239,
+    0.5
+  ); /* Lighter color for hover effect */
+  border-radius: 5px;
+}
+
+.hover-x::before {
+  transform: rotate(45deg);
+}
+
+.hover-x::after {
+  transform: rotate(-45deg);
+}
+
+/* O Hover Effect */
+.hover-o {
+  position: relative;
+}
+
+.hover-o::before {
+  content: "";
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  border: 8px solid rgba(239, 144, 140, 0.5);
+  border-radius: 50%;
+}
+
+.endgame {
+  border-radius: 6px;
+  background: white;
+
+  text-align: center;
+  animation: endgame-entrance 0.3s 0.43s cubic-bezier(0, 0.8, 0.4, 1.2) both;
+  margin: 30px auto;
+  max-width: 300px;
+}
+
+.msg {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  font-size: 24pt;
+  line-height: 1.5;
+  color: #777;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.endgame-newgame {
+  border: none;
+  /* margin: 20px auto; */
+  padding: 20px;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 6px;
+  background-color: #3ea65c;
+  font-size: 12pt;
+  cursor: pointer;
+  display: none;
+  height: 54px;
+}
+
+.reset {
+  background-color: #fe5132;
+  color: white;
+  padding: 18px;
+}
+
+.endgame-newgame:hover {
+  opacity: 0.8;
+}
+
+.winner {
+  background-color: yellow !important;
+  animation: pulse 0.5s infinite alternate;
+  z-index: 2;
+}
+
+.draw {
+  animation: shake 0.3s ease-in-out 3;
+}
+
+table {
+  width: 100%;
+  margin-block: 30px;
+  font-size: 2rem;
+}
+
+th.o {
+  color: #e66660;
+}
+
+th.x {
+  color: #545af5;
+}
+
+/* Shake animation for draw */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-5px);
+  }
+  40% {
+    transform: translateX(5px);
+  }
+  60% {
+    transform: translateX(-5px);
+  }
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+/* Flash animation for draw */
+@keyframes flash {
+  0%,
+  100% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: rgba(255, 255, 0, 0.5);
+  } /* Yellow flash */
+}
+
+.flash {
+  animation: flash 0.5s ease-in-out 3;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes endgame-entrance {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes horizontal-lines {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 100%;
+  }
+}
+@keyframes vertical-lines {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes draw-x {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 60px;
+  }
+}
+
+@keyframes draw-circle {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
